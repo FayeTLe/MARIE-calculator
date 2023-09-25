@@ -1,0 +1,161 @@
+﻿LoopOp, Input
+        Store Operator
+        Output
+        Subt Ten
+If, Skipcond 000
+    Jump If2
+Then, Load Error
+      Output
+      Jump LoopOp
+      
+If2, Load Operator
+     Subt Thirteen
+     Skipcond 800
+     Jump LoopNum1
+Then2, Load Error
+       Output
+       Jump LoopOp
+
+LoopNum1, Input
+          Store Num1
+          Output
+          Subt One
+If3, Skipcond 000
+     Jump If4
+Then3, Load Error
+       Output
+       Jump LoopNum1
+If4, Load Num1
+     Subt Nine
+     Skipcond 800
+     Jump LoopNum2
+Then4, Load Error
+       Output
+       Jump LoopNum1
+
+LoopNum2, Input 
+          Store Num2
+          Output
+          Subt One
+If5, Skipcond 000
+     Jump If6
+Then5, Load Error
+       Output
+       Jump LoopNum2
+If6, Load Num2
+     Subt Nine
+     Skipcond 800
+     Jump Start
+Then6, Load Error
+       Output
+       Jump LoopNum2
+
+Start, Load Operator
+If7, Subt Ten
+     Skipcond 400
+     Jump If8
+Then7, JnS Subr1
+       Load Result
+       Output
+       Load Zero
+       Store Result
+       Jump LoopOp
+If8, Load Operator
+     Subt Eleven
+     Skipcond 400
+     Jump If9
+Then8, JnS Subr2
+       Load Result
+       Output
+       Load Zero
+       Store Result
+       Jump LoopOp
+If9, Load Operator
+      Subt Twelve
+      Skipcond 400
+      Jump Else
+Then9, Load Num1
+       JnS Subr3
+       Load Result
+       Output
+       Load Zero
+       Store Result
+       Jump LoopOp
+Else, Load Num1
+      JnS Subr4
+      Load Quotient
+      Output
+      Load Remainder 
+      Output
+      Load Zero
+      Store Quotient
+      Load Zero
+      Store Remainder
+      Jump LoopOp
+          
+
+
+   
+
+Num1, DEC 0
+Num2, DEC 0
+Result, DEC 0
+Operator, DEC 0
+One, DEC 1
+Zero, DEC 0
+Nine, DEC 9
+Ten, DEC 10
+Eleven, DEC 11
+Twelve, DEC 12
+Thirteen, DEC 13
+Quotient, DEC 0
+Remainder, DEC 0
+Error, DEC 100
+Count, DEC 0
+
+Subr1, HEX 0
+       Load Num1
+       Add Num2
+       Store Result
+       JumpI Subr1
+
+Subr2, HEX 0
+       Load Num1
+       Subt Num2
+       Store Result
+       JumpI Subr2
+
+Subr3, HEX 0
+       Load Num2
+       Subt One
+       Store Count
+loop, Load Result
+      Add Num1
+      Store Result
+      Load Count
+      Subt One
+      Store Count
+      Skipcond 000
+      Jump loop
+      JumpI Subr3
+
+Subr4, HEX 0
+Load Num1
+Subt Num2
+if, Skipcond 000
+    Jump else
+then, Load Num1
+      Store Remainder
+      JumpI Subr4
+else, Load Num1
+      Subt Num2
+      Store Remainder 
+      Store Num1
+      Load Quotient
+      Add One 
+      Store Quotient
+      Load Remainder
+      Subt Num2
+      Skipcond 000
+      Jump else
+      JumpI Subr4
